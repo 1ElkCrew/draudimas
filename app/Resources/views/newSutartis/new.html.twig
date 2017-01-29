@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12 col-md-push-2 col-md-4">
+            {% form_theme form 'bootstrap_3_layout.html.twig' %}
+            <h1>Įmonė / Asmuo</h1>
+            <div class="col-xs-12">{{ form_widget(form.firmName) }}</div>
+
+            <h2>Pinigų suma</h2>
+            <div class="col-md-6 col-xs-12">{{ form_widget(form.money) }}</div>
+            <br>
+
+            <h2>Data</h2>
+            <div class="col-xs-12">{{ form_widget(form.inputDate) }}</div>
+            {# TODO: Date order & locale fixed OR currentDay()??? #}
+
+            <h2>Terminas</h2>
+            <div class="col-md-4 col-xs-6">Metai{{ form_widget(form.termin) }}</div>
+            {# TODO: termin >= 5 #}
+            <br><br><br>
+
+            <div class="col-xs-12">{{ form_widget(form.add) }}</div> {# TODO: class="btn-success" & symbol + #}
+        </div>
+    </div>
+{% endblock %}

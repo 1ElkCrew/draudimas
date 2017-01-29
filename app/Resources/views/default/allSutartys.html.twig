@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-md-push-1 col-md-10" style="font-size: 16pt;">
+        <h1>Sutartys</h1>
+        <table class="table table-striped table-condensed table-bordered table-hover col-md-10 ">
+            <tr style="background-color: lightgray">
+                <td class="col-md-6 text-center"><b>Įmonė / Asmuo</b></td>
+                <td class="col-md-2 text-center"><b>Suma</b></td>
+                <td class="col-md-2 text-center"><b>Data</b></td>
+                <td class="col-md-1 text-center"><b>Terminas</b></td>
+            </tr>
+            {% for sutartis in sutartis %}
+            <tr>
+                <td class="col-md-6"> {{ sutartis.firmName }} </td>
+                <td class="col-md-2 text-center"> {{ sutartis.money|number_format(2) }} €</td>
+                <td class="col-md-2 text-center"> {{ sutartis.inputDate|date('Y-m-d') }}</td>
+                <td class="col-md-1 text-center"> {{ sutartis.termin }} metai</td> {# TODO: if 10 <= metai <= 20 || metai % 10 = 0 tai "metų" sutvarkymas iš "metai" #}
+                {# TODO: STATUS #}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
