@@ -1,3 +1,5 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
@@ -15,7 +17,7 @@ security:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
-                csrf_provider: security.csrf.token_manager
+                #csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
             logout:       true
             anonymous:    true
 

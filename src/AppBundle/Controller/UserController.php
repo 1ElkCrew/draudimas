@@ -3,6 +3,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ class UserController extends Controller{
             $em->flush();
             return new Response();
         }
-        return $this->render("", [ //TODO: fix user
+        return $this->render("", [
             'user' => $user,
             'form' => $form->createView(),
         ]);

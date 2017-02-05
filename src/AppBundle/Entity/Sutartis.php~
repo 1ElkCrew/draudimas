@@ -155,3 +155,4 @@ class Sutartis
         return $this->termin;
     }
 }
+
