@@ -5,11 +5,27 @@
         <h1>Sutartys</h1>
         <table class="table table-striped table-condensed table-bordered table-hover col-md-10 ">
             <tr style="background-color: lightgray">
-                <td class="col-md-6 text-center"><b>Įmonė / Asmuo</b></td>
-                <td class="col-md-2 text-center"><b>Suma</b></td>
-                <td class="col-md-2 text-center"><b>Data</b></td>
-                <td class="col-md-1 text-center"><b>Terminas</b></td>
-                <td class="col-md-1 text-center"><b>Statusas</b></td>
+                <th class="col-md-6 text-center">Įmonė / Asmuo</th>
+                <th class="col-md-2 text-center">Suma</th>
+                <th class="col-md-2 text-center">Data</th>
+                <th class="col-md-1 text-center">Terminas</th>
+                <th class="col-md-1 text-center">
+                    {% if orderBy['status'] is defined %}
+                        {% if orderBy['status'] == 'ASC' %}
+                            <a href="{{ url('sutartys', {'orderBy': '-status'}) }}">
+                                <b>Statusas</b>
+                            </a>
+                        {% else %}
+                            <a href="{{ url('sutartys', {'orderBy': 'status'}) }}">
+                                <b>Statusas</b>
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{{ url('sutartys', {'orderBy': 'status'}) }}">
+                            <b>Statusas</b>
+                        </a>
+                    {% endif %}
+                </th>
             </tr>
             {% for sutartis in sutartis %}
             <tr>
@@ -24,6 +40,10 @@
                 {% if sutartis.status == 0 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-ok-sign" style="color: darkgreen;"></td>
                 {% elseif sutartis.status == 1 %}
+                    <td class="col-md-1 text-center glyphicon glyphicon-remove-circle" style="color: #e5b700;"></td>
+                {% elseif sutartis.status == 2 %}
+                    <td class="col-md-1 text-center glyphicon glyphicon-info-sign" style="color: teal;"></td>
+                {% elseif sutartis.status == 3 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-remove-sign" style="color: darkred;"></td>
                 {% endif %}
             </tr>

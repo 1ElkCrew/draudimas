@@ -30,10 +30,9 @@ class SutartisType extends AbstractType{
                 ])
                 ->add('status', ChoiceType::class, [
                     'choices' => [
-                        'Veikia' => 0,
-                        'Tuoj baigsis' => 1,
-                        'Baigesi' => 2,
-                        'Atsauktas' => 3,
+                        'Galiojanti' => 0,
+                        'Sustabdyta' => 1,
+                        'Nutraukta' => 2,
                     ]
                 ])
             ;

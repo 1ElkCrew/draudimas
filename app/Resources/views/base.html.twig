@@ -11,10 +11,10 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ path("sutartys") }}">Sutartys</a>
+                    <a class="navbar-brand" href="{{ path("sutartys") }}"><i class="glyphicon glyphicon-list"></i> Sutartys</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ path('new') }}">Naujas įrašas</a></li>
+                    <li><a href="{{ path('new') }}"><i class="glyphicon glyphicon-plus"></i> Naujas įrašas</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if app.user is defined and app.user is not null %}
