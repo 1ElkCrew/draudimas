@@ -9,14 +9,23 @@
                 <td class="col-md-2 text-center"><b>Suma</b></td>
                 <td class="col-md-2 text-center"><b>Data</b></td>
                 <td class="col-md-1 text-center"><b>Terminas</b></td>
+                <td class="col-md-1 text-center"><b>Statusas</b></td>
             </tr>
             {% for sutartis in sutartis %}
             <tr>
                 <td class="col-md-6"> {{ sutartis.firmName }} </td>
                 <td class="col-md-2 text-center"> {{ sutartis.money|number_format(2) }} €</td>
                 <td class="col-md-2 text-center"> {{ sutartis.inputDate|date('Y-m-d') }}</td>
-                <td class="col-md-1 text-center"> {{ sutartis.termin }} metai</td> {# TODO: if 10 <= metai <= 20 || metai % 10 = 0 tai "metų" sutvarkymas iš "metai" #}
-                {# TODO: STATUS #}
+                {% if sutartis.termin % 10 == 0 or (sutartis.termin >= 10 and sutartis.termin <= 19) %} {# what if 111 metai? meh... #}
+                    <td class="col-md-1 text-center"> {{ sutartis.termin }} metų</td>
+                {% else %}
+                    <td class="col-md-1 text-center"> {{ sutartis.termin }} metai</td>
+                {% endif %}
+                {% if sutartis.status == 0 %}
+                    <td class="col-md-1 text-center glyphicon glyphicon-ok-sign" style="color: darkgreen;"></td>
+                {% elseif sutartis.status == 1 %}
+                    <td class="col-md-1 text-center glyphicon glyphicon-remove-sign" style="color: darkred;"></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>

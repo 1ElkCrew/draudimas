@@ -17,8 +17,12 @@
                     <li><a href="{{ path('new') }}">Naujas įrašas</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path("fos_user_registration_register") }}"><span class="glyphicon glyphicon-user"></span> Registruotis</a></li>
-                    <li><a href="{{ path("fos_user_security_login") }}"><span class="glyphicon glyphicon-log-in"></span> Prisijungti</a></li>
+                    {% if app.user is defined and app.user is not null %}
+                        <li><a href="{{ path('fos_user_security_logout') }}">{{ app.user }} (Atsijungti)</a></li>
+                    {% else %}
+                        <li><a href="{{ path("fos_user_registration_register") }}"><span class="glyphicon glyphicon-user"></span> Registruotis</a></li>
+                        <li><a href="{{ path("fos_user_security_login") }}"><span class="glyphicon glyphicon-log-in"></span> Prisijungti</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

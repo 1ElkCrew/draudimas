@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -23,8 +24,16 @@ class SutartisType extends AbstractType{
                     'constraints' => [
                         new Range([
                             'min' => 5,
-                            'minMessage' => 'Termin less than 5',
+                            'minMessage' => '',
                         ])
+                    ]
+                ])
+                ->add('status', ChoiceType::class, [
+                    'choices' => [
+                        'Veikia' => 0,
+                        'Tuoj baigsis' => 1,
+                        'Baigesi' => 2,
+                        'Atsauktas' => 3,
                     ]
                 ])
             ;

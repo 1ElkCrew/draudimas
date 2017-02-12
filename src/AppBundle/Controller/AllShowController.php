@@ -12,7 +12,11 @@ class AllShowController extends Controller
      * @Route("/sutartys", name="sutartys")
      */
     public function indexAction(Request $request){
-        $sutartis = $this->getDoctrine()->getRepository("AppBundle:Sutartis")->findAll();
+        $sutartis = $this->getDoctrine()->getRepository("AppBundle:Sutartis")->findBy([
+            'user' => $this->getUser(),
+        ],[
+            'status' => 'ASC'
+        ]);
         return $this->render('default/allSutartys.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
             'sutartis' => $sutartis,

@@ -44,9 +44,17 @@ class Sutartis
     /**
      * @ORM\Column(name="termin", type="integer")
      */
-    private $termin; //TODO: >=5
+    private $termin;
 
-    // TODO: STATUS
+    /**
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     */
+    private $user;
 
     /// Sets current date in $inputDate field on adding a new object.
     public function __construct(){
@@ -157,5 +165,53 @@ class Sutartis
     public function getTermin()
     {
         return $this->termin;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Sutartis
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Sutartis
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

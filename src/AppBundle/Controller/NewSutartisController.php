@@ -22,6 +22,7 @@ class NewSutartisController extends Controller
         $form = $this->createForm(SutartisType::class, $sutartis)->add('add', SubmitType::class, ['label' => 'Išsaugoti']);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
+            $sutartis->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($sutartis);
             $em->flush();
