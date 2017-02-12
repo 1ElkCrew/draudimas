@@ -9,14 +9,24 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Range;
 
 
 class SutartisType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('firmName', TextType::class)
                 ->add('money', MoneyType::class)
-                ->add('inputDate', DateType::class)
-                ->add('termin', IntegerType::class)
+                ->add('inputDate', DateType::class, [
+                    'format' => 'yyyy-MM-dd',
+                ])
+                ->add('termin', IntegerType::class, [
+                    'constraints' => [
+                        new Range([
+                            'min' => 5,
+                            'minMessage' => 'Termin less than 5',
+                        ])
+                    ]
+                ])
             ;
     }
 

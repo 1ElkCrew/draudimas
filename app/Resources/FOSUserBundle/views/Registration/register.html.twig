@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block body %}
+<div class="col-xs-6 col-xs-push-3 panel panel-body panel-default" xmlns="http://www.w3.org/1999/html">
+    {#
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_widget(form) }}
+    <div>
+        <input class="form-control" type="submit" value="{{ 'registration.submit'|trans }}" />
+    </div>
+    {{ form_end(form) }}
+    #}
+    <form action="{{ path("fos_user_registration_register") }}" method="post"/>
+        <label for="fos_user_registration_form_username">{{ 'registration.register.username'|trans }}</label>
+        <input class="form-control" type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="180" pattern=".{2,}">
+        <br>
+        <b>Password</b>
+        <input class="form-control" type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required">
+        <br>
+        <b>Repeat password</b>
+        <input class="form-control" type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required">
+        <br>
+        <input class="btn btn-default" type="submit" id="_submit" name="_submit" value="{{ 'registration.register.submit'|trans }}"/>
+        <input type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" value="null@null.null" style="display:none;">{#LOL#}
+    </form>
+</div>
+{% endblock %}

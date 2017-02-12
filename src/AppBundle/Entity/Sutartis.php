@@ -44,10 +44,14 @@ class Sutartis
     /**
      * @ORM\Column(name="termin", type="integer")
      */
-    private $termin;
+    private $termin; //TODO: >=5
 
     // TODO: STATUS
 
+    /// Sets current date in $inputDate field on adding a new object.
+    public function __construct(){
+        $this->inputDate = new \DateTime();
+    }
 
     /**
      * Get id

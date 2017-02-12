@@ -17,8 +17,8 @@
                     <li><a href="{{ path('new') }}">Naujas įrašas</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Registruotis</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Prisijungti</a></li>
+                    <li><a href="{{ path("fos_user_registration_register") }}"><span class="glyphicon glyphicon-user"></span> Registruotis</a></li>
+                    <li><a href="{{ path("fos_user_security_login") }}"><span class="glyphicon glyphicon-log-in"></span> Prisijungti</a></li>
                 </ul>
             </div>
         </nav>

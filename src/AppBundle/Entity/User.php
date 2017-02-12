@@ -17,6 +17,8 @@ class User extends BaseUser{
      */
     protected $id;
 
+    //protected $email;
+
     public function __construct() {
         parent::__construct();
     }
