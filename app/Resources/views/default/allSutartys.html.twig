@@ -42,9 +42,9 @@
                 {% elseif sutartis.status == 1 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-remove-circle" style="color: #e5b700;"></td>
                 {% elseif sutartis.status == 2 %}
-                    <td class="col-md-1 text-center glyphicon glyphicon-info-sign" style="color: teal;"></td>
-                {% elseif sutartis.status == 3 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-remove-sign" style="color: darkred;"></td>
+                {% elseif sutartis.status == 3 %}
+                    <td class="col-md-1 text-center glyphicon glyphicon-info-sign" style="color: teal;"></td>
                 {% endif %}
             </tr>
             {% endfor %}

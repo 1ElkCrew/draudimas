@@ -35,6 +35,13 @@ class SutartisType extends AbstractType{
                         'Nutraukta' => 2,
                     ]
                 ])
+                ->add('city', TextType::class, [
+                    'required' => false,
+                ])
+                ->add('contractnum', TextType::class, [
+                    'required' => false,
+                ])
+                //->add('add', SubmitType::class, ['label' => 'Išsaugoti']) manual twig/html for custom style
             ;
     }
 

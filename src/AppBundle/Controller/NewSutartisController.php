@@ -6,7 +6,6 @@ use AppBundle\Entity\Sutartis;
 use AppBundle\Form\SutartisType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,7 +18,7 @@ class NewSutartisController extends Controller
      */
     public function indexAction(Request $request){
         $sutartis = new Sutartis();
-        $form = $this->createForm(SutartisType::class, $sutartis)->add('add', SubmitType::class, ['label' => 'Išsaugoti']);
+        $form = $this->createForm(SutartisType::class, $sutartis);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $sutartis->setUser($this->getUser());

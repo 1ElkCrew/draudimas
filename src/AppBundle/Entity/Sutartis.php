@@ -56,6 +56,16 @@ class Sutartis
      */
     private $user;
 
+    /**
+     * @ORM\Column(name="city", type="string", nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(name="contractnum", type="string", nullable=true) //ONLY NUMBERS AND DASHES, integer?
+     */
+    private $contractnum;
+
     /// Sets current date in $inputDate field on adding a new object.
     public function __construct(){
         $this->inputDate = new \DateTime();
@@ -213,5 +223,53 @@ class Sutartis
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Sutartis
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set contractnum
+     *
+     * @param string $contractnum
+     *
+     * @return Sutartis
+     */
+    public function setContractnum($contractnum)
+    {
+        $this->contractnum = $contractnum;
+
+        return $this;
+    }
+
+    /**
+     * Get contractnum
+     *
+     * @return string
+     */
+    public function getContractnum()
+    {
+        return $this->contractnum;
     }
 }
