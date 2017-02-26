@@ -27,23 +27,23 @@
                     {% endif %}
                 </th>
             </tr>
-            {% for sutartis in sutartis %}
+            {% for s in sutartis %}
             <tr>
-                <td class="col-md-6"> {{ sutartis.firmName }} </td>
-                <td class="col-md-2 text-center"> {{ sutartis.money|number_format(2) }} €</td>
-                <td class="col-md-2 text-center"> {{ sutartis.inputDate|date('Y-m-d') }}</td>
-                {% if sutartis.termin % 10 == 0 or (sutartis.termin >= 10 and sutartis.termin <= 19) %} {# what if 111 metai? meh... #}
-                    <td class="col-md-1 text-center"> {{ sutartis.termin }} metų</td>
+                <td class="col-md-6"><a href="{{ path('one_info', {sutartis: s.id}) }}" style="display: block"> {{ s.firmName }} </a></td>
+                <td class="col-md-2 text-center"> {{ s.money|number_format(2) }} €</td>
+                <td class="col-md-2 text-center"> {{ s.inputDate|date('Y-m-d') }}</td>
+                {% if s.termin % 10 == 0 or (s.termin >= 10 and s.termin <= 19) %} {# what if 111 metai? meh... #}
+                    <td class="col-md-1 text-center"> {{ s.termin }} metų</td>
                 {% else %}
-                    <td class="col-md-1 text-center"> {{ sutartis.termin }} metai</td>
+                    <td class="col-md-1 text-center"> {{ s.termin }} metai</td>
                 {% endif %}
-                {% if sutartis.status == 0 %}
+                {% if s.status == 0 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-ok-sign" style="color: darkgreen;"></td>
-                {% elseif sutartis.status == 1 %}
+                {% elseif s.status == 1 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-remove-circle" style="color: #e5b700;"></td>
-                {% elseif sutartis.status == 2 %}
+                {% elseif s.status == 2 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-remove-sign" style="color: darkred;"></td>
-                {% elseif sutartis.status == 3 %}
+                {% elseif s.status == 3 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-info-sign" style="color: teal;"></td>
                 {% endif %}
             </tr>
