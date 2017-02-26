@@ -9,10 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class OneShowController extends Controller
+class EditController extends Controller
 {
     /**
-     * @Route("/info/{sutartis}", name="one_info")
+     * @Route("/redaguoti/{sutartis}", name="edit")
      * @param Request $request
      * @param Sutartis $sutartis
      * @return Response
