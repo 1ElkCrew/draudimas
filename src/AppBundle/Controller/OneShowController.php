@@ -9,27 +9,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class NewSutartisController extends Controller
+class OneShowController extends Controller
 {
     /**
-     * @Route("/nauja", name="new")
+     * @Route("/info/{sutartis}", name="one_info")
      * @param Request $request
+     * @param Sutartis $sutartis
      * @return Response
      */
-    public function indexAction(Request $request){
-        $sutartis = new Sutartis();
+    public function indexAction(Request $request, Sutartis $sutartis){
         $form = $this->createForm(SutartisType::class, $sutartis);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $sutartis->setUser($this->getUser());
+        if($form->isValid() && $form->isSubmitted()){
             $em = $this->getDoctrine()->getManager();
-            $em->persist($sutartis);
             $em->flush();
-            return $this->redirectToRoute('sutartys');
+            return $this->redirectToRoute("sutartys");
         }
-        return $this->render('newSutartis/new.html.twig', [
+        return $this->render("newSutartis/new.html.twig",[
             'sutartis' => $sutartis,
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     *
+     */
 }

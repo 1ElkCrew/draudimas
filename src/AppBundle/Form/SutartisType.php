@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,6 +36,13 @@ class SutartisType extends AbstractType{
                         'Nutraukta' => 2,
                     ]
                 ])
+                ->add('city', TextType::class, [
+                    'required' => false,
+                ])
+                ->add('contractnum', TextType::class, [
+                    'required' => false,
+                ])
+                ->add('add', SubmitType::class, ['label' => 'Išsaugoti']) //manual twig/html for custom style
             ;
     }
 
