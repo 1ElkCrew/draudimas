@@ -29,8 +29,12 @@ class AllShowController extends Controller
         }
         $sutartis = $this->getDoctrine()->getRepository("AppBundle:Sutartis")->findBy([
             'user' => $this->getUser(),
-            ], $orderBy)
-        ;
+        ], $orderBy);
+
+        $svc = $this->get('app.update');
+        $svc->sutartisStatusUpdate($this->getUser());
+
+        //sutartisStatusUpdate();
         return $this->render('default/allSutartys.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
             'sutartis' => $sutartis,

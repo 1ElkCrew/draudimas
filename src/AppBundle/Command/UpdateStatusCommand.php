@@ -14,15 +14,15 @@ class UpdateStatusCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('app:update_status_command')
+            ->setName('app:update:status')
             ->setDescription('Hello PhpStorm');
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-
+    protected function execute(InputInterface $input, OutputInterface $output){
+        dump('hello');
+        //crontab for interval update, get all info change if needed, etc.
     }
 }

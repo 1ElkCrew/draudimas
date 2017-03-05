@@ -170,7 +170,7 @@ class Sutartis
     /**
      * Get termin
      *
-     * @return \DateTime
+     * @return int
      */
     public function getTermin()
     {
@@ -271,5 +271,11 @@ class Sutartis
     public function getContractnum()
     {
         return $this->contractnum;
+    }
+
+    public function getEndDate(){
+        $interval = new \DateInterval('P'.$this->termin.'Y');
+        $currdate = clone $this->inputDate;
+        return $currdate->add($interval);
     }
 }

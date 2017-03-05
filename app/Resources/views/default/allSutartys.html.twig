@@ -29,7 +29,7 @@
             </tr>
             {% for s in sutartis %}
             <tr>
-                <td class="col-md-6"><a href="{{ path('one_info', {sutartis: s.id}) }}" style="display: block"> {{ s.firmName }} </a></td>
+                <td class="col-md-6"><a href="{{ path('info', {sutartis: s.id}) }}" style="display: block"> {{ s.firmName }} </a></td>
                 <td class="col-md-2 text-center"> {{ s.money|number_format(2) }} €</td>
                 <td class="col-md-2 text-center"> {{ s.inputDate|date('Y-m-d') }}</td>
                 {% if s.termin % 10 == 0 or (s.termin >= 10 and s.termin <= 19) %} {# what if 111 metai? meh... #}
@@ -43,7 +43,7 @@
                     <td class="col-md-1 text-center glyphicon glyphicon-remove-circle" style="color: #e5b700;"></td>
                 {% elseif s.status == 2 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-remove-sign" style="color: darkred;"></td>
-                {% elseif s.status == 3 %}
+                {% elseif s.status == -1 %}
                     <td class="col-md-1 text-center glyphicon glyphicon-info-sign" style="color: teal;"></td>
                 {% endif %}
             </tr>

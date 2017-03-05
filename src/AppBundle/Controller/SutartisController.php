@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EditController extends Controller
+class SutartisController extends Controller
 {
     /**
      * @Route("/redaguoti/{sutartis}", name="edit")
@@ -32,6 +32,36 @@ class EditController extends Controller
     }
 
     /**
-     *
+     * @Route("/nauja", name="new")
+     * @param Request $request
+     * @return Response
      */
+    public function addAction(Request $request){
+        $sutartis = new Sutartis();
+        $form = $this->createForm(SutartisType::class, $sutartis);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $sutartis->setUser($this->getUser());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($sutartis);
+            $em->flush();
+            return $this->redirectToRoute('sutartys');
+        }
+        return $this->render('newSutartis/new.html.twig', [
+            'sutartis' => $sutartis,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/info/{sutartis}", name="info")
+     * @param Request $request
+     * @param Sutartis $sutartis
+     * @return Response
+     */
+    public function detailsAction (Request $request, Sutartis $sutartis){
+        return $this->render(':default:info.html.twig', [
+            'sutartis' => $sutartis,
+        ]);
+    }
 }

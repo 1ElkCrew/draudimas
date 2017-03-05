@@ -1,8 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <span><i style="font-size: 24pt; color: darkgreen;" class="glyphicon glyphicon-ok-sign"></i></span>
-    <span><i style="font-size: 24pt; color: darkred;" class="glyphicon glyphicon-remove-sign"></i></span>
-    <span><i style="font-size: 24pt; color: #e5b700;" class="glyphicon glyphicon-remove-circle"></i></span>
-    <span><i style="font-size: 24pt; color: teal;" class="glyphicon glyphicon-info-sign"></i></span>
+    <div class="row">
+        <div class="col-xs-12 col-md-push-2 col-md-4" style="font-size: large">
+            Įmonė / Asmuo: <br>
+            <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.firmName }}</b><br></div>
+            Pinigai: <br>
+            <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.money|number_format(2, ',', '.') }} €</b><br></div>
+            Pradžios data: <br>
+            <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.inputDate|date('Y-m-d') }}</b><br></div>
+            Pabaigos data: <br>
+            <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.endDate|date('Y-m-d') }}</b><br></div>
+            Terminas: <br>
+            <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.termin }} m.</b><br></div>
+            Contrakto nr: <b>{% if sutartis.contractnum == null %} <span style="color: #AA3333; ">nėra duomenų</span>{% else %} {{ sutartis.contractnum }} {% endif %}</b><br>
+            Miestas: <b>{% if sutartis.city == null %} <span style="color: #AA3333; ">nėra duomenų</span>{% else %}{{ sutartis.city }} {% endif %}</b><br>
+            Statusas:<b>
+            {% if sutartis.status == 0 %}
+                Galiojanti <i class="glyphicon glyphicon-ok-sign" style="color: darkgreen;"></i>
+            {% elseif sutartis.status == 1 %}
+                Sustabdyta <i class="glyphicon glyphicon-remove-circle" style="color: #e5b700;"></i>
+            {% elseif sutartis.status == 2 %}
+                Nutraukta <i class="glyphicon glyphicon-remove-sign" style="color: darkred;"></i>
+            {% elseif sutartis.status == -1 %}
+                <span style="color:#b3b300;">Šiais metais baigiasi <i class="glyphicon glyphicon-info-sign" style="color: teal;"></i></span>
+            {% endif %}</b><br>
+            <a href="{{ path('edit', {'sutartis': sutartis.id}) }}" class="btn btn-default col-xs-12 col-md-6">Redaguoti</a>
+        </div>
+    </div>
 {% endblock %}
