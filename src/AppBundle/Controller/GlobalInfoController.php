@@ -15,17 +15,45 @@ class GlobalInfoController extends Controller {
             'user' => $this->getUser(),
         ]);
 
+        if ($request->query->has('year')) {
+            $year = $request->query->get('year');
+        }
+        else {
+            $year = (new \DateTime())->format('Y');
+        }
+
+        if ($request->query->has('month')) {
+            $month = $request->query->get('month');
+        }
+        else {
+            $month = (new \DateTime())->format('m');
+        }
+        $rep = $this->getDoctrine()->getRepository('AppBundle:Sutartis');
+        $orderBy = $rep->dataSort($request);
+        $svc = $this->get('app.update');
+        $svc->sutartisStatusUpdate($this->getUser());
         $svc = $this->get('app.info');
-        $sum = $svc->showYearlyEarnings($this->getUser(), (new \DateTime())->format('Y'));
-        $cnt = $svc->countYearlySutartys($this->getUser(), (new \DateTime())->format('Y'));
-
-
+        $atrSutartis = $svc->getYearInfo($this->getUser(), $year, $month);
+        $sum = $svc->getYearSum($this->getUser(), $year);
+        $amt = $svc->getYearAmount($this->getUser(), $year);
+        $msum = null;
+        $mamt = null;
+        if ($month != null) {
+            $msum = $svc->getMonthSum($this->getUser(), $year, $month);
+            $mamt = $svc->getMonthAmount($this->getUser(), $year , $month);
+        }
 
         return $this->render('default/globalInfo.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
             'sutartis' => $sutartis,
             'sum' => $sum,
-            'cnt' => $cnt,
+            'amt' => $amt,
+            'msum' => $msum,
+            'mamt' => $mamt,
+            'year' => $year,
+            'month' => $month,
+            'orderBy' => $orderBy,
+            'atrSutartis' => $atrSutartis,
         ]);
     }
 }

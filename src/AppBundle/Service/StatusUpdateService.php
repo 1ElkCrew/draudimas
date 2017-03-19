@@ -24,8 +24,6 @@ class StatusUpdateService {
             'user' => $user,
             //'status' => [-1, 0],
         ]);
-
-
         /**@var \AppBundle\Entity\Sutartis $info*/
         foreach ($sutartis as $info){
             $endDate = $info->getEndDate();

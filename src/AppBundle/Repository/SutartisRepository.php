@@ -10,7 +10,83 @@ use AppBundle\Entity\User;
  * repository methods below.
  */
 class SutartisRepository extends \Doctrine\ORM\EntityRepository {
-    public function getDataByDate(User $user = null, \DateTime $dateStart, \DateTime $dateEnd){
+    public function getYearlySum(User $user = null, \DateTime $dateStart, \DateTime $dateEnd){
+        $qb = $this->createQueryBuilder('t')
+            ->select('SUM(t.money)')
+            ->where('t.inputDate >= :dateStart')
+            ->andWhere('t.inputDate <= :dateEnd')
+            ->andWhere('t.user = :user')
+            ->setParameters([
+                'dateStart' => $dateStart,
+                'dateEnd' => $dateEnd,
+                'user' => $user,
+            ]);
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getYearlyAmount(User $user = null, \DateTime $dateStart, \DateTime $dateEnd){
+        $qb = $this->createQueryBuilder('t')
+            ->select('COUNT(t)')
+            ->where('t.inputDate >= :dateStart')
+            ->andWhere('t.inputDate <= :dateEnd')
+            ->andWhere('t.user = :user')
+            ->setParameters([
+                'dateStart' => $dateStart,
+                'dateEnd' => $dateEnd,
+                'user' => $user,
+            ]);
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getMonthlySum(User $user = null, \DateTime $dateStart, \DateTime $dateEnd){
+        $qb = $this->createQueryBuilder('t')
+            ->select('SUM(t.money)')
+            ->where('t.inputDate >= :dateStart')
+            ->andWhere('t.inputDate <= :dateEnd')
+            ->andWhere('t.user = :user')
+            ->setParameters([
+                'dateStart' => $dateStart,
+                'dateEnd' => $dateEnd,
+                'user' => $user,
+            ]);
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getMonthlyAmount(User $user = null, \DateTime $dateStart, \DateTime $dateEnd){
+        $qb = $this->createQueryBuilder('t')
+            ->select('COUNT(t)')
+            ->where('t.inputDate >= :dateStart')
+            ->andWhere('t.inputDate <= :dateEnd')
+            ->andWhere('t.user = :user')
+            ->setParameters([
+                'dateStart' => $dateStart,
+                'dateEnd' => $dateEnd,
+                'user' => $user,
+            ]);
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+    public function dataSort($request){
+        $orderBy = [];
+        if($request->query->has('orderBy')){
+            $fields = explode(",",$request->query->get('orderBy'));
+            foreach ($fields as $o) {
+                $direction = 'ASC';
+                if (substr($o, 0, 1) == "-") {
+                    $o = substr($o, 1, strlen($o) - 1);
+                    $direction = 'DESC';
+                }
+                $orderBy[$o] = $direction;
+            }
+        }
+        else {
+            $orderBy['status'] = 'ASC';
+            $orderBy['inputDate'] = 'DESC';
+            $orderBy['firmName'] = 'ASC';
+        }
+        return $orderBy;
+    }
+
+    public function getYearlyInfo(User $user = null, \DateTime $dateStart, \DateTime $dateEnd){
         $qb = $this->createQueryBuilder('t')
             ->select('t')
             ->where('t.inputDate >= :dateStart')

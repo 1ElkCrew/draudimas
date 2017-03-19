@@ -19,6 +19,7 @@ class InfoSumService {
         $this->em = $em;
     }
 
+    /*
     public function showYearlyEarnings(User $user = null, $year){ // TODO: if user == null, tai sum == 0 wtf...
         $dateStart = new \DateTime($year . '-01-01');
         $dateEnd = new \DateTime($year . '-12-31');
@@ -27,26 +28,59 @@ class InfoSumService {
             ->getDataByDate($user, $dateStart, $dateEnd);
 
         $sum = 0;
-        /** @var \AppBundle\Entity\Sutartis $sutartis*/
+        /** @var \AppBundle\Entity\Sutartis $sutartis*
         foreach ($sutartys as $sutartis) {
             $sum += $sutartis->getMoney();
         }
         return $sum;
     }
-
-    public function countYearlySutartys(User $user = null, $year){
+    */
+    public function getYearSum(User $user = null, $year){
         $dateStart = new \DateTime($year . '-01-01');
         $dateEnd = new \DateTime($year . '-12-31');
+        $sum = $this->em->getRepository('AppBundle:Sutartis')
+            ->getYearlySum($user, $dateStart, $dateEnd);
+        return $sum;
+    }
 
-        $sutartys = $this->em->getRepository('AppBundle:Sutartis')
-            ->getDataByDate($user, $dateStart, $dateEnd);
+    public function getYearAmount(User $user = null, $year){
+        $dateStart = new \DateTime($year . '-01-01');
+        $dateEnd = new \DateTime($year . '-12-31');
+        $sum = $this->em->getRepository('AppBundle:Sutartis')
+            ->getYearlyAmount($user, $dateStart, $dateEnd);
+        return $sum;
+    }
 
-        $i = 0;
-        /** @var \AppBundle\Entity\Sutartis $sutartis*/
-        foreach ($sutartys as $sutartis) {
-            $i++;
+    public function getMonthSum(User $user = null, $year, $month){
+        $dateStart = new \DateTime($year . '-' . $month . '-01');
+        $dateEnd = clone $dateStart;
+        $dateEnd->modify('+1month-1day');
+        $sum = $this->em->getRepository('AppBundle:Sutartis')
+            ->getMonthlySum($user, $dateStart, $dateEnd);
+        return $sum;
+    }
+
+    public function getMonthAmount(User $user = null, $year, $month){
+        $dateStart = new \DateTime($year . '-'. $month .'-01');
+        $dateEnd = clone $dateStart;
+        $dateEnd->modify('+1month-1day');
+        $sum = $this->em->getRepository('AppBundle:Sutartis')
+            ->getMonthlyAmount($user, $dateStart, $dateEnd);
+        return $sum;
+    }
+    public function getYearInfo(User $user = null, $year, $month = null){
+        if($month == null) {
+            $dateStart = new \DateTime($year . '-01-01');
+            $dateEnd = new \DateTime($year . '-12-31');
         }
-        return $i;
+        else {
+            $dateStart = new \DateTime($year . '-' . $month . '-01');
+            $dateEnd = clone $dateStart;
+            $dateEnd->modify('+1month-1day');
+        }
+        $info = $this->em->getRepository('AppBundle:Sutartis')
+            ->getYearlyInfo($user, $dateStart, $dateEnd);
+        return $info;
     }
 
 }
