@@ -17,6 +17,7 @@ class GlobalInfoController extends Controller {
 
         $svc = $this->get('app.info');
         $sum = $svc->showYearlyEarnings($this->getUser(), (new \DateTime())->format('Y'));
+        $cnt = $svc->countYearlySutartys($this->getUser(), (new \DateTime())->format('Y'));
 
 
 
@@ -24,6 +25,7 @@ class GlobalInfoController extends Controller {
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
             'sutartis' => $sutartis,
             'sum' => $sum,
+            'cnt' => $cnt,
         ]);
     }
 }

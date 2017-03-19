@@ -27,12 +27,26 @@ class InfoSumService {
             ->getDataByDate($user, $dateStart, $dateEnd);
 
         $sum = 0;
-        /**@var \AppBundle\Entity\Sutartis $info*/
+        /** @var \AppBundle\Entity\Sutartis $sutartis*/
         foreach ($sutartys as $sutartis) {
             $sum += $sutartis->getMoney();
         }
         return $sum;
     }
-    //TODO: count amount of entities
+
+    public function countYearlySutartys(User $user = null, $year){
+        $dateStart = new \DateTime($year . '-01-01');
+        $dateEnd = new \DateTime($year . '-12-31');
+
+        $sutartys = $this->em->getRepository('AppBundle:Sutartis')
+            ->getDataByDate($user, $dateStart, $dateEnd);
+
+        $i = 0;
+        /** @var \AppBundle\Entity\Sutartis $sutartis*/
+        foreach ($sutartys as $sutartis) {
+            $i++;
+        }
+        return $i;
+    }
 
 }
