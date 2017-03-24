@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * Sutartis
@@ -66,10 +66,16 @@ class Sutartis
      */
     private $contractnum;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Worker")
+     */
+    private $workers;
+
     /// Sets current date in $inputDate field on adding a new object.
     public function __construct(){
         $this->inputDate = new \DateTime();
     }
+
 
     /**
      * Get id
@@ -277,5 +283,39 @@ class Sutartis
         $interval = new \DateInterval('P'.$this->termin.'Y');
         $currdate = clone $this->inputDate;
         return $currdate->add($interval);
+    }
+
+    /**
+     * Add worker
+     *
+     * @param \AppBundle\Entity\Worker $worker
+     *
+     * @return Sutartis
+     */
+    public function addWorker(\AppBundle\Entity\Worker $worker)
+    {
+        $this->workers[] = $worker;
+
+        return $this;
+    }
+
+    /**
+     * Remove worker
+     *
+     * @param \AppBundle\Entity\Worker $worker
+     */
+    public function removeWorker(\AppBundle\Entity\Worker $worker)
+    {
+        $this->workers->removeElement($worker);
+    }
+
+    /**
+     * Get workers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWorkers()
+    {
+        return $this->workers;
     }
 }
