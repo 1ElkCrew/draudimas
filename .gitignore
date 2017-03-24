@@ -14,10 +14,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-<<<<<<< HEAD
 .idea/inspectionProfiles/
 *~
-=======
-.idea/*
-*~
->>>>>>> 3529250ec0ec2717ffe8517f1370903106e83288
