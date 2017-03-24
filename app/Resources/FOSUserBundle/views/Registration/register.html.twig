@@ -1,30 +1,22 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block body %}
-<div class="col-xs-6 col-xs-push-3 panel panel-body panel-default" xmlns="http://www.w3.org/1999/html">
-    {#
-    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-        {{ form_widget(form) }}
-    <div>
-        <input class="form-control" type="submit" value="{{ 'registration.submit'|trans }}" />
+<div class="row">
+    <div class="col-xs-12 col-md-push-2 col-md-4">
+        {% form_theme form 'bootstrap_3_layout.html.twig' %}
+        {{ form_start(form) }}
+            <h1>Username</h1>
+            <div class="col-xs-12">{{ form_row(form.username, {'label': false }) }}</div>
+            <br><br>
+
+            <h1>Password</h1>
+            <div class="col-xs-12">{{ form_row(form.plainPassword, {'label': false}) }}</div>
+
+            <h1>Email</h1>
+            <div class="col-xs-12">{{ form_row(form.email, {'label': false}) }}</div>
+
+            <input class="btn btn-default" type="submit" id="_submit" name="_submit" value="{{ 'registration.submit'|trans }}"/>
+        {{ form_end(form) }}
     </div>
-    {{ form_end(form) }}
-    #}
-    {# TODO: form_start fix like in new.html.twig #}
-    <form action="{{ path("fos_user_registration_register") }}" method="post"/>
-        <label for="fos_user_registration_form_username">{{ 'form.username'|trans }}</label>
-        <input class="form-control" type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="180" pattern=".{2,}">
-        <br>
-        <label for="fos_user_registration_form_plainPassword_first">{{ 'form.password'|trans }}</label>
-        <input class="form-control" type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required">
-        <br>
-        <label for="fos_user_registration_form_plainPassword_second">{{ 'form.password_confirmation'|trans }}</label>
-        <input class="form-control" type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required">
-        <br>
-        <label for="fos_user_registration_form_email">{{ 'form.email'|trans }}</label>
-        <input class="form-control" type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required">
-        <br>
-    <input class="btn btn-default" type="submit" id="_submit" name="_submit" value="{{ 'registration.submit'|trans }}"/>
-    </form>
 </div>
 {% endblock %}
