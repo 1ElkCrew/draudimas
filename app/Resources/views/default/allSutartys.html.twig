@@ -45,7 +45,7 @@
             </tr>
             {% for s in sutartis %}
             <tr>
-                <td class="col-md-6"><a href="{{ path('info', {sutartis: s.id}) }}" style="display: block"> {{ s.firmName }}<span style="font-size: 12pt"> - {{ s.worker }}</span></a></td>
+                <td class="col-md-6"><a href="{{ path('info', {sutartis: s.id, 'back': '1'}) }}" style="display: block"> {{ s.firmName }}<span style="font-size: 12pt"> - {{ s.worker }}</span></a></td>
                 <td class="col-md-2 text-center"> {{ s.money|number_format(2) }} €</td>
                 <td class="col-md-2 text-center"> {{ s.inputDate|date('Y-m-d') }}</td>
                 {% if s.termin % 10 == 0 or (s.termin >= 10 and s.termin <= 19) %} {# what if 111 metai? meh... #}

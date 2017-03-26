@@ -27,7 +27,8 @@
             {% elseif sutartis.status == -1 %}
                 <span style="color:#b3b300;">Šiais metais baigiasi <i class="glyphicon glyphicon-info-sign" style="color: teal;"></i></span>
             {% endif %}</b><br>
-            <a href="{{ path('edit', {'sutartis': sutartis.id}) }}" class="btn btn-default col-xs-12 col-md-6">Redaguoti</a>
+            <a href="{{ path('edit', {'sutartis': sutartis.id, 'back': back}) }}" class="btn btn-default col-xs-12 col-md-6">Redaguoti</a>
+            <a href="{{ path('delete', {'sutartis': sutartis.id, 'back': back}) }}" class="btn btn-danger col-xs-12 col-md-6">Trinti</a>
         </div>
     </div>
 {% endblock %}

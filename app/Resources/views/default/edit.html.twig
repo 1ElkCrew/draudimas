@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12 col-md-push-2 col-md-4">
+            {% form_theme form 'bootstrap_3_layout.html.twig' %}
+            {{ form_start(form) }}
+                <h1>Įmonė</h1>
+                <div class="col-xs-12">{{ form_row(form.firmName, {'label': false}) }}</div>
+
+                <h1>Asmuo</h1>
+                <div class="col-xs-12">{{ form_row(form.worker, {'label': false }) }}</div>
+
+                <h2>Pinigų suma</h2>
+                <div class="col-md-6 col-xs-12">{{ form_row(form.money, {'label': false}) }}</div>
+                <br><br>
+
+                <h2>Data</h2>
+                <div class="col-xs-12">{{ form_row(form.inputDate, {'label': false}) }}</div>
+
+                <h2>Terminas</h2>
+                <div class="col-md-4 col-xs-6">Metai{{ form_row(form.termin, {'label': false}) }}</div>
+                <br><br><br><br>
+                <div class="col-xs-6">Statusas{{ form_row(form.status, {'label': false}) }}</div>
+                <br><br><br>
+                <div class="col-xs-12">Sutarties nr.{{ form_row(form.contractnum, {'label': false}) }}</div>
+                <div class="col-xs-12">Miestas{{ form_row(form.city, {'label': false}) }}</div>
+
+                <div class="col-xs-12">{{ form_row(form.add, {'back': back}) }}</div>
+            {{ form_end(form) }}
+                <br>
+        </div>
+    </div>
+{% endblock %}

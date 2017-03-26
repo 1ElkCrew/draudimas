@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12 col-md-push-2 col-md-8" style="font-size: 16pt;">
+            <h1>Ištrinti įrašą <br><b>{{ sutartis.firmName }} - {{ sutartis.worker }}</b></h1>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+            <a class="btn btn-default col-xs-12 col-md-3" href="{{ url('info', { 'sutartis': id, 'back': back }) }}">Ne</a>
+        </div>
+    </div>
+{% endblock %}

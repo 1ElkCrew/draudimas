@@ -6,6 +6,7 @@ use AppBundle\Entity\Sutartis;
 use AppBundle\Form\SutartisType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,11 +24,19 @@ class SutartisController extends Controller
         if($form->isValid() && $form->isSubmitted()){
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("sutartys");
+            if ($request->query->has('back') && $request->query->get('back') == '1') {
+                return $this->redirectToRoute("sutartys");
+            }
+            else if ($request->query->has('back') && $request->query->get('back') == '2') {
+                return $this->redirectToRoute("global_info");
+            }
         }
-        return $this->render("newSutartis/new.html.twig",[
+        return $this->render("default/edit.html.twig",[
             'sutartis' => $sutartis,
             'form' => $form->createView(),
+            'back' => $request->query->has('back') ? $request->query->get('back') : '1',
+            'id' => $sutartis->getId(),
+            'attr' => ['class' => 'btn btn-success col-xs-12 col-md-3'],
         ]);
     }
 
@@ -47,7 +56,7 @@ class SutartisController extends Controller
             $em->flush();
             return $this->redirectToRoute('sutartys');
         }
-        return $this->render('newSutartis/new.html.twig', [
+        return $this->render('default/new.html.twig', [
             'sutartis' => $sutartis,
             'form' => $form->createView(),
         ]);
@@ -62,6 +71,39 @@ class SutartisController extends Controller
     public function detailsAction (Request $request, Sutartis $sutartis){
         return $this->render(':default:info.html.twig', [
             'sutartis' => $sutartis,
+            'back' => $request->query->has('back') ? $request->query->get('back') : '1',
+        ]);
+    }
+
+    /**
+     * @Route("/trinti/{sutartis}", name="delete")
+     * @param Sutartis $sutartis
+     */
+    public function deleteAction(Request $request, Sutartis $sutartis){
+        $form = $this->createFormBuilder()
+            ->add('submit', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-danger col-xs-12 col-md-3'],
+                'label' => 'Taip',
+            ])
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($sutartis);
+            $em->flush();
+            if ($request->query->has('back') && $request->query->get('back') == '1') {
+                return $this->redirectToRoute("sutartys");
+            }
+            else if ($request->query->has('back') && $request->query->get('back') == '2') {
+                return $this->redirectToRoute("global_info");
+            }
+        }
+
+        return $this->render("default/delete.html.twig", [
+            'sutartis' => $sutartis,
+            'form' => $form->createView(),
+            'back' => $request->query->has('back') ? $request->query->get('back') : '1',
+            'id' => $sutartis->getId(),
         ]);
     }
 }

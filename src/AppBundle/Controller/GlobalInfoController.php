@@ -54,6 +54,7 @@ class GlobalInfoController extends Controller {
             'month' => $month,
             'orderBy' => $orderBy,
             'atrSutartis' => $atrSutartis,
+            'back' => '2',
         ]);
     }
 }

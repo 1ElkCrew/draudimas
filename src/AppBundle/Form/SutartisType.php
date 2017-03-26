@@ -43,8 +43,10 @@ class SutartisType extends AbstractType{
                 ->add('contractnum', TextType::class, [
                     'required' => false,
                 ])
-                ->add('add', SubmitType::class, ['label' => 'Išsaugoti']) //manual twig/html for custom style
-            ;
+                ->add('add', SubmitType::class, [
+                    'label' => 'Išsaugoti',
+                    'attr' => ['class' => 'btn btn-success col-xs-12 col-md-4'],
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {

@@ -24,6 +24,7 @@ class AllShowController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
             'sutartis' => $sutartis,
             'orderBy' => $orderBy,
+            'back' => '1',
         ]);
     }
 }
