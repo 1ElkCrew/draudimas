@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints\Range;
 class SutartisType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('firmName', TextType::class)
+                ->add('worker', TextType::class)
                 ->add('money', MoneyType::class)
                 ->add('inputDate', DateType::class, [
                     'format' => 'yyyy-MM-dd',

@@ -24,7 +24,11 @@
     </div>
 
     <div class="col-md-push-1 col-md-10" style="font-size: 16pt;">
-        <h1>Sutartys iš </h1> {#TODO: show year and month#}
+        {% if month is empty %}
+            <h1>Sutartys iš {{ year }}</h1>
+        {% else %}
+            <h1>Sutartys iš {{ year }} - {{ month }}</h1>
+        {% endif %}
         <table class="table table-striped table-condensed table-bordered table-hover col-md-10 ">
             <tr style="background-color: lightgray">
                 <th class="col-md-6 text-center">
@@ -67,7 +71,7 @@
             </tr>
             {% for s in atrSutartis %}
                 <tr>
-                    <td class="col-md-6"><a href="{{ path('info', {sutartis: s.id}) }}" style="display: block"> {{ s.firmName }} </a></td>
+                    <td class="col-md-6"><a href="{{ path('info', {sutartis: s.id}) }}" style="display: block"> {{ s.firmName }}<span style="font-size: 12pt"> - {{ s.worker }}</span></a></td>
                     <td class="col-md-2 text-center"> {{ s.money|number_format(2) }} €</td>
                     <td class="col-md-2 text-center"> {{ s.inputDate|date('Y-m-d') }}</td>
                     {% if s.termin % 10 == 0 or (s.termin >= 10 and s.termin <= 19) %} {# what if 111 metai? meh... #}

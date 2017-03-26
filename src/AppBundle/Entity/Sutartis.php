@@ -67,9 +67,9 @@ class Sutartis
     private $contractnum;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Worker")
+     * @ORM\Column(name="worker", type="string")
      */
-    private $workers;
+    private $worker;
 
     /// Sets current date in $inputDate field on adding a new object.
     public function __construct(){
@@ -286,36 +286,26 @@ class Sutartis
     }
 
     /**
-     * Add worker
+     * Set worker
      *
-     * @param \AppBundle\Entity\Worker $worker
+     * @param string $worker
      *
      * @return Sutartis
      */
-    public function addWorker(\AppBundle\Entity\Worker $worker)
+    public function setWorker($worker)
     {
-        $this->workers[] = $worker;
+        $this->worker = $worker;
 
         return $this;
     }
 
     /**
-     * Remove worker
+     * Get worker
      *
-     * @param \AppBundle\Entity\Worker $worker
+     * @return string
      */
-    public function removeWorker(\AppBundle\Entity\Worker $worker)
+    public function getWorker()
     {
-        $this->workers->removeElement($worker);
-    }
-
-    /**
-     * Get workers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getWorkers()
-    {
-        return $this->workers;
+        return $this->worker;
     }
 }

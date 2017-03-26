@@ -3,8 +3,10 @@
 {% block body %}
     <div class="row">
         <div class="col-xs-12 col-md-push-2 col-md-4" style="font-size: large">
-            Įmonė / Asmuo: <br>
+            Įmonė: <br>
             <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.firmName }}</b><br></div>
+            Asmuo: <br>
+            <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.worker }}</b></div>
             Pinigai: <br>
             <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.money|number_format(2, ',', '.') }} €</b><br></div>
             Pradžios data: <br>
