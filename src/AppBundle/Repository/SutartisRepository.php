@@ -90,17 +90,44 @@ class SutartisRepository extends \Doctrine\ORM\EntityRepository {
         return $orderBy;
     }
 
-    public function getYearlyInfo(User $user = null, \DateTime $dateStart, \DateTime $dateEnd){
+    public function getYearlyInfo(User $user = null, \DateTime $dateStart = null, \DateTime $dateEnd = null, $searchFirm = null){
         $qb = $this->createQueryBuilder('t')
-            ->select('t')
-            ->where('t.inputDate >= :dateStart')
-            ->andWhere('t.inputDate <= :dateEnd')
-            ->andWhere('t.user = :user')
-            ->setParameters([
+            ->select('t');
+        $qb->where('t.user = :user');
+
+        if($searchFirm != null){
+            $qb->andWhere('t.firmName = :searchFirm');
+        }
+        if($dateEnd != null && $dateStart != null){
+            $qb ->andWhere('t.inputDate >= :dateStart')
+                ->andWhere('t.inputDate <= :dateEnd');
+        }
+
+        //code is sweaty, mom's spaghetti
+        if ($searchFirm != null && ($dateEnd != null && $dateStart != null)){
+            $qb->setParameters([
+                'user' => $user,
+                'searchFirm' => $searchFirm,
                 'dateStart' => $dateStart,
                 'dateEnd' => $dateEnd,
-                'user' => $user,
             ]);
+        }
+        else if ($searchFirm == null && ($dateEnd != null && $dateStart != null)){
+            $qb->setParameters([
+                'user' => $user,
+                'dateStart' => $dateStart,
+                'dateEnd' => $dateEnd,
+            ]);
+        }
+        else if ($searchFirm != null && ($dateEnd == null && $dateStart == null)){
+            $qb->setParameters([
+                'user' => $user,
+                'searchFirm' => $searchFirm,
+            ]);
+        }
+        else {
+            $qb->setParameter('user', $user);
+        }
         return $qb->getQuery()->getResult();
     }
 }

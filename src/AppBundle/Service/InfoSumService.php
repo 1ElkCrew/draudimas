@@ -67,18 +67,21 @@ class InfoSumService {
             ->getMonthlyAmount($user, $dateStart, $dateEnd);
         return $sum;
     }
-    public function getYearInfo(User $user = null, $year, $month = null){
-        if($month == null) {
-            $dateStart = new \DateTime($year . '-01-01');
-            $dateEnd = new \DateTime($year . '-12-31');
-        }
-        else {
-            $dateStart = new \DateTime($year . '-' . $month . '-01');
-            $dateEnd = clone $dateStart;
-            $dateEnd->modify('+1month-1day');
+    public function getYearInfo(User $user = null, $year = null, $month = null, $searchFirm = null){
+        $dateStart = null;
+        $dateEnd = null;
+        if ($year != null) {
+            if ($month == null) {
+                $dateStart = new \DateTime($year . '-01-01');
+                $dateEnd = new \DateTime($year . '-12-31');
+            } else {
+                $dateStart = new \DateTime($year . '-' . $month . '-01');
+                $dateEnd = clone $dateStart;
+                $dateEnd->modify('+1month-1day');
+            }
         }
         $info = $this->em->getRepository('AppBundle:Sutartis')
-            ->getYearlyInfo($user, $dateStart, $dateEnd);
+            ->getYearlyInfo($user, $dateStart, $dateEnd, $searchFirm);
         return $info;
     }
 

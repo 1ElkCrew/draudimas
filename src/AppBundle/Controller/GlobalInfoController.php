@@ -14,7 +14,6 @@ class GlobalInfoController extends Controller {
         $sutartis = $this->getDoctrine()->getRepository('AppBundle:Sutartis')->findBy([
             'user' => $this->getUser(),
         ]);
-
         if ($request->query->has('year')) {
             $year = $request->query->get('year');
         }
@@ -28,12 +27,16 @@ class GlobalInfoController extends Controller {
         else {
             $month = (new \DateTime())->format('m');
         }
+        $searchFirm = null;
+        if ($request->query->has('searchFirm')){
+            $searchFirm = $request->query->get('searchFirm');
+        }
         $rep = $this->getDoctrine()->getRepository('AppBundle:Sutartis');
         $orderBy = $rep->dataSort($request);
         $svc = $this->get('app.update');
         $svc->sutartisStatusUpdate($this->getUser());
         $svc = $this->get('app.info');
-        $atrSutartis = $svc->getYearInfo($this->getUser(), $year, $month);
+        $atrSutartis = $svc->getYearInfo($this->getUser(), $year, $month, $searchFirm);
         $sum = $svc->getYearSum($this->getUser(), $year);
         $amt = $svc->getYearAmount($this->getUser(), $year);
         $msum = null;
@@ -55,6 +58,7 @@ class GlobalInfoController extends Controller {
             'orderBy' => $orderBy,
             'atrSutartis' => $atrSutartis,
             'back' => '2',
+            'searchFirm' => $searchFirm,
         ]);
     }
 }
