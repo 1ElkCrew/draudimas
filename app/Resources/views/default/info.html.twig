@@ -15,7 +15,7 @@
             <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.endDate|date('Y-m-d') }}</b><br></div>
             Terminas: <br>
             <div class="col-md-push-1 col-md-11" style="padding: 0 0 10px 0"><b>{{ sutartis.termin }} m.</b><br></div>
-            Contrakto nr: <b>{% if sutartis.contractnum == null %} <span style="color: #AA3333; ">nėra duomenų</span>{% else %} {{ sutartis.contractnum }} {% endif %}</b><br>
+            Kontrakto numeris: <b>{% if sutartis.contractnum == null %} <span style="color: #AA3333; ">nėra duomenų</span>{% else %} {{ sutartis.contractnum }} {% endif %}</b><br>
             Miestas: <b>{% if sutartis.city == null %} <span style="color: #AA3333; ">nėra duomenų</span>{% else %}{{ sutartis.city }} {% endif %}</b><br>
             Statusas:<b>
             {% if sutartis.status == 0 %}

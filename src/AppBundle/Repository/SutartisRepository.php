@@ -16,6 +16,7 @@ class SutartisRepository extends \Doctrine\ORM\EntityRepository {
             ->where('t.inputDate >= :dateStart')
             ->andWhere('t.inputDate <= :dateEnd')
             ->andWhere('t.user = :user')
+            ->andWhere('t.status != 2')
             ->setParameters([
                 'dateStart' => $dateStart,
                 'dateEnd' => $dateEnd,
@@ -30,6 +31,7 @@ class SutartisRepository extends \Doctrine\ORM\EntityRepository {
             ->where('t.inputDate >= :dateStart')
             ->andWhere('t.inputDate <= :dateEnd')
             ->andWhere('t.user = :user')
+            ->andWhere('t.status != 2')
             ->setParameters([
                 'dateStart' => $dateStart,
                 'dateEnd' => $dateEnd,
@@ -44,6 +46,7 @@ class SutartisRepository extends \Doctrine\ORM\EntityRepository {
             ->where('t.inputDate >= :dateStart')
             ->andWhere('t.inputDate <= :dateEnd')
             ->andWhere('t.user = :user')
+            ->andWhere('t.status != 2')
             ->setParameters([
                 'dateStart' => $dateStart,
                 'dateEnd' => $dateEnd,
@@ -58,6 +61,7 @@ class SutartisRepository extends \Doctrine\ORM\EntityRepository {
             ->where('t.inputDate >= :dateStart')
             ->andWhere('t.inputDate <= :dateEnd')
             ->andWhere('t.user = :user')
+            ->andWhere('t.status != 2')
             ->setParameters([
                 'dateStart' => $dateStart,
                 'dateEnd' => $dateEnd,

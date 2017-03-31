@@ -1,6 +1,4 @@
 <?php
-use Doctrine\ORM\EntityManager;
-
 /**
  * Created by PhpStorm.
  * User: briedis
@@ -22,7 +20,6 @@ class StatusUpdateService {
     public function sutartisStatusUpdate(User $user = null){
         $sutartis = $this->em->getRepository('AppBundle:Sutartis')->findBy([
             'user' => $user,
-            //'status' => [-1, 0],
         ]);
         /**@var \AppBundle\Entity\Sutartis $info*/
         foreach ($sutartis as $info){
@@ -35,6 +32,7 @@ class StatusUpdateService {
             elseif($afterYear > $endDate){
                 $info->setStatus(-1);
             }
+            /* TODO: Jei nutraukta ar atsaukta = nekeisti. */
             //TODO: JEI PRAILGINA TERMINA IR t.t..
         }
         $this->em->flush();

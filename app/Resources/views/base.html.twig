@@ -15,25 +15,37 @@
             font-weight:bold;
             text-decoration: none;
         }
+        .nav-border-right{
+            border-right: 2px solid rgb(157, 157, 157);
+        }
+        .nav-border-right:hover{
+            border-right: 2px solid #fff;
+        }
+        .nav-border-left{
+            border-left: 2px solid rgb(157, 157, 157);
+        }
+        .nav-border-left:hover{
+            border-left: 2px solid #fff;
+        }
     </style>
 </head>
     <body>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
-                <div class="navbar-header">
+                <div class="navbar-header nav-border-right">
                     <a class="navbar-brand" href="{{ path("homepage") }}"><i class="glyphicon glyphicon-home"></i> Pagrindinis</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ path("sutartys") }}"><i class="glyphicon glyphicon-list"></i> Sutartys</a></li>
-                    <li><a href="{{ path('new') }}"><i class="glyphicon glyphicon-plus"></i> Naujas įrašas</a></li>
-                    <li><a href="{{ path('global_info') }}"><i class="glyphicon glyphicon-info-sign"></i> Informacija</a></li>
+                    <li class="nav-border-right"><a href="{{ path("sutartys") }}"><i class="glyphicon glyphicon-list"></i> Sutartys</a></li>
+                    <li class="nav-border-right"><a href="{{ path('new') }}"><i class="glyphicon glyphicon-plus"></i> Naujas įrašas</a></li>
+                    <li class="nav-border-right"><a href="{{ path('global_info') }}"><i class="glyphicon glyphicon-info-sign"></i> Informacija</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if app.user is defined and app.user is not null %}
-                        <li><a href="{{ path('fos_user_security_logout') }}">{{ app.user }} (Atsijungti)</a></li>
+                        <li class="nav-border-left"><a href="{{ path('fos_user_security_logout') }}">{{ app.user }} (Atsijungti)</a></li>
                     {% else %}
-                        <li><a href="{{ path("fos_user_registration_register") }}"><span class="glyphicon glyphicon-user"></span> Registruotis</a></li>
-                        <li><a href="{{ path("fos_user_security_login") }}"><span class="glyphicon glyphicon-log-in"></span> Prisijungti</a></li>
+                        <li class="nav-border-left"><a href="{{ path("fos_user_registration_register") }}"><span class="glyphicon glyphicon-user"></span> Registruotis</a></li>
+                        <li class="nav-border-left"><a href="{{ path("fos_user_security_login") }}"><span class="glyphicon glyphicon-log-in"></span> Prisijungti</a></li>
                     {% endif %}
                 </ul>
             </div>

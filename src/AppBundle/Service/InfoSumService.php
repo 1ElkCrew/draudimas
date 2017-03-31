@@ -1,6 +1,4 @@
 <?php
-use Doctrine\ORM\EntityManager;
-
 /**
  * Created by PhpStorm.
  * User: briedis
@@ -35,6 +33,7 @@ class InfoSumService {
         return $sum;
     }
     */
+
     public function getYearSum(User $user = null, $year){
         $dateStart = new \DateTime($year . '-01-01');
         $dateEnd = new \DateTime($year . '-12-31');
